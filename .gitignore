@@ -61,3 +61,25 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+# kdiff3 ignore
+*.orig
+
+# maven ignore
+target/
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+# other
+mmall_src/
