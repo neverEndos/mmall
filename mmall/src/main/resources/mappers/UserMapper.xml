@@ -151,6 +151,11 @@
           update_time = now()
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <update id="updatePasswordByUsername">
+        update mmall_user
+        set password = #{newPassword}, updateTime = now()
+        where username = #{username}
+    </update>
 
     <select id="checkEmail" resultType="int" parameterType="string">
         select count(1)
@@ -182,5 +187,16 @@
         where username = #{username}
         and question = #{question}
         and answer = #{answer}
+    </select>
+    <select id="checkPassword" resultType="java.lang.Integer">
+        select count(1)
+        from mmall_user
+        where userId = #{userId}
+        and password = #{password}
+    </select>
+    <select id="checkEmailByUserId" resultType="java.lang.Integer">
+        select count(1)
+        from mmall_user
+        where id != #{userId}
     </select>
 </mapper>
