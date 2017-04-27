@@ -81,7 +81,7 @@ public class ServiceResponse<T> implements Serializable {
         return new ServiceResponse<T>(ResponseCode.ERROR.getCode());
     }
 
-    public static <T> ServiceResponse<T> createByError(String errorMsg) {
+    public static <T> ServiceResponse<T> createByErrorMessage(String errorMsg) {
         return new ServiceResponse<T>(ResponseCode.ERROR.getCode(), errorMsg);
     }
 
