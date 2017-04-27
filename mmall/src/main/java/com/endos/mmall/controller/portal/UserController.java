@@ -86,7 +86,7 @@ public class UserController {
     public ServiceResponse<User> getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServiceResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
+            return ServiceResponse.createByErrorMessage(Const.Message.USER_NOT_LOGIN);
         }
         return ServiceResponse.createBySuccess(user);
     }
