@@ -153,7 +153,7 @@
     </update>
     <update id="updatePasswordByUsername">
         update mmall_user
-        set password = #{newPassword}, updateTime = now()
+        set password = #{newPassword}, update_time = now()
         where username = #{username}
     </update>
 

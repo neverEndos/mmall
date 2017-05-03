@@ -68,7 +68,7 @@ public class UserController {
      * 验证用户名或者email是否存在
      * @param str
      * @param type username或者email
-     * @return
+     * @return 不存在为真，存在为假
      */
     @PostMapping(value = "/check_valid.do")
     @ResponseBody
@@ -170,7 +170,7 @@ public class UserController {
     }
 
     /**
-     * 获取登陆用户信息
+     * 获取登陆用户信息,如果session中没有提示需要强制登陆
      * @param session
      * @return
      */
