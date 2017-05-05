@@ -21,6 +21,7 @@ public class Const {
         String CHANGE_PASSWORD_SUCCESS = "密码修改成功";
         String UPDATE_USER_INFO_SUCCESS = "更新信息成功";
         String ADD_CATEGORY_SUCCESS = "增加品类成功";
+        String UPDATE_CATEGORY_SUCCESS = "更新品类成功";
 
         String USER_EXIST = "用户名已存在";
         String EMAIL_EXIST = "邮箱已存在";
@@ -37,6 +38,7 @@ public class Const {
         String CHANGE_PASSWORD_FAIL = "密码修改失败";
         String UPDATE_USER_INFO_FAIL = "更新个人信息失败";
         String ADD_CATEGORY_FAIL = "增加品类失败";
+        String UPDATE_CATEGORY_FAIL = "更新品类失败";
 
         String EMPTY_PARAM = "参数不能为空";
         String EMPTY_QUESTION = "找回密码的问题是空的";

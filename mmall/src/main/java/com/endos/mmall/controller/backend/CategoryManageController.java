@@ -30,7 +30,7 @@ public class CategoryManageController {
 
     @PostMapping("/add_category.do")
     @ResponseBody
-    public ServiceResponse addCategory(String categoryName, @RequestParam(value = "parentId", defaultValue = "0") Integer parentId, HttpSession session) {
+    public ServiceResponse addCategory(String categoryName, @RequestParam(value = "categoryId", defaultValue = "0") Integer parentId, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServiceResponse.createByError(ResponseCode.NEED_LOGIN.getCode(), Const.Message.NEED_LOGIN);
@@ -44,14 +44,29 @@ public class CategoryManageController {
     }
 
     @PostMapping("/set_category_name.do")
-    public ServiceResponse setCategoryName(String categoryName, Integer parentId, HttpSession session) {
+    @ResponseBody
+    public ServiceResponse setCategoryName(String categoryName, Integer categoryId, HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServiceResponse.createByError(ResponseCode.NEED_LOGIN.getCode(), Const.Message.NEED_LOGIN);
         }
         // 检验是否为管理员
         if (userService.checkAdminRole(user).isSuccess()) {
-            return categoryService.updateCategoryName(categoryName, parentId);
+            return categoryService.updateCategoryName(categoryName, categoryId);
+        }
+        return ServiceResponse.createByErrorMessage(Const.Message.NOT_ADMIN);
+    }
+
+    @PostMapping("get_category.do")
+    @ResponseBody
+    public ServiceResponse getChildrenParallelCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId, HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServiceResponse.createByError(ResponseCode.NEED_LOGIN.getCode(), Const.Message.NEED_LOGIN);
+        }
+        if (userService.checkAdminRole(user).isSuccess()) {
+            //查询子节点的category信息,并且不递归,保持平级
+            return categoryService.getChildrenParallelCategory(categoryId);
         }
         return ServiceResponse.createByErrorMessage(Const.Message.NOT_ADMIN);
     }

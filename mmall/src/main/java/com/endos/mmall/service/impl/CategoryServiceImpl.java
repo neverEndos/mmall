@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Endos on 2017/05/04.
  */
@@ -44,11 +46,32 @@ public class CategoryServiceImpl implements ICategoryService {
     /**
      * 修改分类名称
      * @param categoryName
-     * @param parentId
+     * @param categoryId
      * @return
      */
     @Override
-    public ServiceResponse updateCategoryName(String categoryName, Integer parentId) {
+    public ServiceResponse updateCategoryName(String categoryName, Integer categoryId) {
+        if (StringUtils.isBlank(categoryName) || categoryId == null) {
+            return ServiceResponse.createByErrorMessage(Const.Message.EMPTY_PARAM);
+        }
+        Category category = new Category();
+        category.setId(categoryId);
+        category.setName(categoryName);
+
+        int resultCount = categoryMapper.updateByPrimaryKey(category);
+        if (resultCount > 0){
+            return ServiceResponse.createBySuccessMessage(Const.Message.UPDATE_CATEGORY_SUCCESS);
+        }
+        return ServiceResponse.createByErrorMessage(Const.Message.UPDATE_CATEGORY_FAIL);
+    }
+
+    /**
+     * 查询子节点的category信息,并且不递归,保持平级
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public ServiceResponse<List<Category>> getChildrenParallelCategory(Integer categoryId) {
         return null;
     }
 }
